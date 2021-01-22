@@ -22,7 +22,7 @@ int main(void)
 	printf("Enter base number: ");
 	fflush(stdin);fflush(stdout);
 	scanf("%d",&num);
-    printf("Enter power number (positive integer): ");
+        printf("Enter power number (positive integer): ");
 	fflush(stdin);fflush(stdout);
 	scanf("%d",&power);
 	printf("%d^%d = %d",num,power,CalcPower(num,power));
