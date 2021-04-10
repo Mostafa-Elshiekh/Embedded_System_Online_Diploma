@@ -1,0 +1,83 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+flash            0x08000000         0x00020000         xr
+sram             0x20000000         0x00005000         xrw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+
+.text           0x08000000      0x170
+ *(.vectors*)
+ .vectors       0x08000000       0x50 startup.o
+ *(.text*)
+ .text          0x08000050       0x24 Alarm_control.o
+                0x08000050                High_Pressure_Detected
+ .text          0x08000074       0xc4 driver.o
+                0x08000074                Delay
+                0x08000094                getPressureVal
+                0x080000ac                Set_Alarm_actuator
+                0x080000e8                GPIO_INITIALIZATION
+ .text          0x08000138       0x30 main.o
+                0x08000138                main
+ .text          0x08000168        0x8 startup.o
+ *(.rodata)
+
+.glue_7         0x08000170        0x0
+ .glue_7        0x08000170        0x0 linker stubs
+
+.glue_7t        0x08000170        0x0
+ .glue_7t       0x08000170        0x0 linker stubs
+
+.vfp11_veneer   0x08000170        0x0
+ .vfp11_veneer  0x08000170        0x0 linker stubs
+
+.v4_bx          0x08000170        0x0
+ .v4_bx         0x08000170        0x0 linker stubs
+
+.iplt           0x08000170        0x0
+ .iplt          0x08000170        0x0 Alarm_control.o
+
+.rel.dyn        0x08000170        0x0
+ .rel.iplt      0x08000170        0x0 Alarm_control.o
+
+.data           0x08000170        0x0
+ *(.data)
+ .data          0x08000170        0x0 Alarm_control.o
+ .data          0x08000170        0x0 driver.o
+ .data          0x08000170        0x0 main.o
+ .data          0x08000170        0x0 startup.o
+
+.igot.plt       0x08000170        0x0
+ .igot.plt      0x08000170        0x0 Alarm_control.o
+
+.bss            0x20000000        0x0
+ *(.bss)
+ .bss           0x20000000        0x0 Alarm_control.o
+ .bss           0x20000000        0x0 driver.o
+ .bss           0x20000000        0x0 main.o
+ .bss           0x20000000        0x0 startup.o
+LOAD Alarm_control.o
+LOAD driver.o
+LOAD main.o
+LOAD startup.o
+OUTPUT(Pressure-Controller-cortex-m3.elf elf32-littlearm)
+
+.comment        0x00000000       0x7e
+ .comment       0x00000000       0x7e Alarm_control.o
+                                 0x7f (size before relaxing)
+ .comment       0x0000007e       0x7f driver.o
+ .comment       0x0000007e       0x7f main.o
+
+.ARM.attributes
+                0x00000000       0x31
+ .ARM.attributes
+                0x00000000       0x33 Alarm_control.o
+ .ARM.attributes
+                0x00000033       0x33 driver.o
+ .ARM.attributes
+                0x00000066       0x33 main.o
+ .ARM.attributes
+                0x00000099       0x21 startup.o
