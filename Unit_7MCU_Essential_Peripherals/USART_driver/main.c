@@ -38,7 +38,7 @@ void Clock_Init()
 void Mostafa_CallBack(void)
 {
 	MCAL_UART_RECEIVE_DATA(USART1, &ch, disable);
-gdasfgagjh	MCAL_UART_SEND_DATA(USART1, &ch, disable);
+        MCAL_UART_SEND_DATA(USART1, &ch, disable);
 
 }
 
